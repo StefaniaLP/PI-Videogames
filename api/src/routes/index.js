@@ -16,8 +16,20 @@ const getApiVideogames = async ()=> {
     const apiVideogames = await axios.get (`https://api.rawg.io/api/games?key=${YOUR_API_KEY}`)
     //console.log(apiVideogames.data)
 
+    const pagina2 = await axios.get(apiVideogames.data.next);
+    const pagina3 = await axios.get(pagina2.data.next);
+    const pagina4 = await axios.get(pagina3.data.next);
+    const pagina5 = await axios.get(pagina4.data.next);
     
-    const myApiVideogames = await apiVideogames.data.results.map( (e) => {
+    
+   
+    const api100 = apiVideogames.data.results
+                    .concat(pagina2.data.results)
+                    .concat(pagina3.data.results)
+                    .concat(pagina4.data.results)
+                    .concat(pagina5.data.results);
+
+    const myApiVideogames = await api100.map( (e) => {
         return {
             id: e.id,
             name: e.name,
@@ -43,7 +55,7 @@ const getBDVideogames = async () => {
         }
     })
 
-    console.log("bdvg", bdVideogames)
+    //console.log("bdvg", bdVideogames)
     return bdVideogames;
 }
 
@@ -123,15 +135,41 @@ router.get("/genres", async (req, res)=>{
 })
 
 router.post(PATH,  async (req, res)=>{
-    let {name, description, released, rating, platforms, background_image, createdDB, genres} = req.body
+    let {name, description, released, rating, platforms, background_image, genres} = req.body
 
-    let vgCreate =await Videogame.create({name, description, released, rating, platforms, background_image, createdDB})
+    //valido que me pasen los parametros obligtorios
+        
+    if (!name || !description || !genres || !platforms) {
+        return res.status(400).send("Faltan parametros");
+    }
+    //valido que el nombre del juego no exista
+    const findVideogame = await Videogame.findAll({ where: { name: name } });
+    if (findVideogame.length != 0) {
+        return res.send("El nombre ya esta en uso");
+    }
+    //creo un videgame
+    let vgCreate = await Videogame.create({
+        name,
+        description,
+        rating,
+        released,
+        background_image,
+        platforms: platforms.toString(),
+        
+        });
+    //busco el genero en mi Base de datos
+    let genreDb = await Genre.findAll({
+      where: { name: genres },
+    });
 
-    let genreDb= await Genre.findAll({
-        where: { name: genres}
-    })
-    vgCreate.addGenre(genreDb)
-    res.send("Videogame creado correctamente")
+    if (genreDb.length === 0) {
+      return res.send("El genero no es valido");
+    }
+    //agrego el genero a mi videogame creado
+    vgCreate.addGenre(genreDb);
+    
+    res.send("El Videogame fue creado con exito");
+    
 })
 
 module.exports = router;
