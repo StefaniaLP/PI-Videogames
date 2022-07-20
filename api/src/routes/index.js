@@ -60,9 +60,9 @@ const getBDVideogames = async () => {
 }
 
 const getAllVideogames= async () => {
-    const apiInfo = await getApiVideogames();
-    const bdInfo= await getBDVideogames();
-    const total = apiInfo.concat(bdInfo)
+    const apivg = await getApiVideogames();
+    const bdvg= await getBDVideogames();
+    const total = apivg.concat(bdvg)
     return total
 }
 
