@@ -76,6 +76,12 @@ router.get( `${PATH}/:id`, async (req, res) =>{
     let idFilter = await allVideogames.filter( e => e.id === parseInt(id) )
         
     if (idFilter.length>0) {
+        //console.log(idFilter)
+        const detail = await axios.get (`https://api.rawg.io/api/games/${id}?key=${YOUR_API_KEY}`)
+        const description = detail.data.description_raw
+        //console.log("desc", description)
+        idFilter[0]["description"]= description
+
         res.status(200).json(idFilter)
     } else {
         res.status(404).send (`El ID ${id} no se encuentra`)
