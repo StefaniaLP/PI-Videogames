@@ -36,7 +36,7 @@ const getApiVideogames = async ()=> {
             background_image: e.background_image,
             released: e.released,
             rating: e.rating,
-            genres: e.genres.map((e) => {return e.name;}).join(" "),
+            genres: e.genres.map((e) => {return e.name;}),
           platform: e.platforms.map((e) => e.platform.name),
         }
     })
@@ -48,7 +48,7 @@ const getBDVideogames = async () => {
     const bdVideogames = await Videogame.findAll({
         include: {
             model: Genre,
-            attribute: ["name"],
+            attributes: ["name"],
             through: {
               attributes: [],
             },
@@ -116,15 +116,15 @@ const getGenre = async ()=> {
     if(genresBD.length === 0){
     const genres = await axios.get (`https://api.rawg.io/api/genres?key=${YOUR_API_KEY}`)
     
-    const genresList = await genres.data.results.map( (e) =>  e.name )
-    //console.log(genresList)
-    genresList.forEach(element => {
-        Genre.findOrCreate(
-            {where: {name: element}}
-        )
-    });
+    const genresList = await genres.data.results.map( (e) => ({
+        name: e.name,
+      }) )
+    //console.log("genreList", genresList)
+    
+    Genre.bulkCreate(genresList);
+
     const allGenre = await Genre.findAll()
-   
+    
     return allGenre
     }
    
@@ -142,8 +142,6 @@ router.get("/genres", async (req, res)=>{
 
 router.post(PATH,  async (req, res)=>{
     let {name, description, released, rating, platforms, background_image, genres} = req.body
-
-    //valido que me pasen los parametros obligtorios
         
     if (!name || !description || !genres || !platforms) {
         return res.status(400).send("Faltan parametros");
@@ -153,7 +151,7 @@ router.post(PATH,  async (req, res)=>{
     if (findVideogame.length != 0) {
         return res.send("El nombre ya esta en uso");
     }
-    //creo un videgame
+    //creo un videogame
     let vgCreate = await Videogame.create({
         name,
         description,
@@ -162,7 +160,7 @@ router.post(PATH,  async (req, res)=>{
         background_image,
         platforms: platforms.toString(),
         
-        });
+    });
     //busco el genero en mi Base de datos
     let genreDb = await Genre.findAll({
       where: { name: genres },
@@ -171,11 +169,11 @@ router.post(PATH,  async (req, res)=>{
     if (genreDb.length === 0) {
       return res.send("El genero no es valido");
     }
+    
     //agrego el genero a mi videogame creado
     vgCreate.addGenre(genreDb);
     
     res.send("El Videogame fue creado con exito");
     
 })
-
 module.exports = router;
