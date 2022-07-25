@@ -112,21 +112,28 @@ router.get (PATH, async (req, res)=>{
 })
 
 const getGenre = async ()=> {
-    const genresBD = await Genre.findAll({ attributes: ["name"] });
+    const genresBD = await Genre.findAll();
+    //console.log(("bd, ", genresBD))
+
+
     if(genresBD.length === 0){
     const genres = await axios.get (`https://api.rawg.io/api/genres?key=${YOUR_API_KEY}`)
     
     const genresList = await genres.data.results.map( (e) => ({
         name: e.name,
+
+        
       }) )
     //console.log("genreList", genresList)
     
     Genre.bulkCreate(genresList);
 
     const allGenre = await Genre.findAll()
-    
+    // console.log("ALLGENRES", allGenre)
     return allGenre
     }
+      
+        return genresBD
    
     
 }
@@ -134,6 +141,7 @@ const getGenre = async ()=> {
 router.get("/genres", async (req, res)=>{
     const genr = await getGenre();
     try {
+        //console.log("GENRES", genr)
         res.status(200).json(genr)
     } catch (error) {
         res.status(404).send("No se encontraron generos")
