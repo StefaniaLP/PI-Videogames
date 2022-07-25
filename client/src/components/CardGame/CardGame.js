@@ -18,16 +18,20 @@ export default function CardGame({ name, background_image, genres, id }) {
             width="300px"
           />
         </div>
-        <p >Generos: 
-          { genres[0].name ?
+        <div >Generos: 
+          <p>
+          { genres[0].name ? 
             genres.map(genre => genre.name).join(', ') :
             genres.join(', ') 
-          }   
-          </p>
+          }
+          </p>   
+        </div>
+
+        <Link to="/videogames" >
+          <button className="card-button">Ver mas detalle </button>
+        </Link>
       </div>
-      <Link to="/videogames" >
-        <button className="card-button">Ver mas detalle </button>
-      </Link>
+      
     </div>
   );
 }

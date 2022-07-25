@@ -6,6 +6,7 @@ export default function Paginated ({gamesxPage, allVideogames, paginated}){
     for (var i = 1; i <= Math.ceil(allVideogames/gamesxPage); i++){ 
         pageNumber.push(i); 
     }
+    //console.log("pagenumbeeeeeeeeeeeeeeeeeeeeer",pageNumber)
     return ( 
         <div> 
             <ul> Paginas: 

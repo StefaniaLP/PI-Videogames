@@ -1,10 +1,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getVideogames } from "../../actions";
+import { getVideogames, getGenres } from "../../actions";
 import { Link } from "react-router-dom";
 import CardGame from '../CardGame/CardGame';
 import Paginated from '../Paginated/Paginated';
+
 
 export default function Home(){
     const dispatch = useDispatch()
@@ -14,9 +15,10 @@ export default function Home(){
     const indexLastGame= actualPage*gamesxPage //15
     const indexFirstGame = indexLastGame- gamesxPage // 0
     const actualGames = allVideogames.slice(indexFirstGame,indexLastGame)
-
-    console.log ("gamexpage", gamesxPage)
-    console.log ("allVideogames.len", allVideogames.length)
+    const allGenres = useSelector(state => state.genres)
+    console.log ("aaaaaaaall genres", allGenres)
+    //console.log ("gamexpage", gamesxPage)
+    //console.log ("allVideogames.len", allVideogames.length)
     const paginado = (pageNumber) => {
         SetActualPage (pageNumber)
     }
@@ -24,10 +26,15 @@ export default function Home(){
         dispatch(getVideogames())
     }, [dispatch])
 
-    function handleClick (e){
+    useEffect ( ()=> {
+        dispatch(getGenres());
+    },[dispatch])
+
+    /*function handleClick (e){
         e.preventDefault()
         dispatch(getVideogames())
-    }    
+    }  */
+
     /*let activeClassName = "underline";
     dentro del Navlink verificar si pongo esto cuando arme el css
     className={({ isActive }) =>
@@ -36,33 +43,48 @@ export default function Home(){
         <div>
             <Link to="/videogames">Crear Videojuego</Link>
             <h1>VIDEOGAMES</h1>
-            <button onClick={e=>{handleClick(e)}}> Lista de videogames</button>
-            <div>
-                <select>
-                    <option value= "asc">Ascendente</option>
-                    <option value= "desc">Descendente</option>
+            <hr></hr>
+            <div>FILTROS
+                <select >
+                    <option value= "Alfabe">Orden Alfabetico</option>
+                    <option value= "asc">A - Z</option>
+                    <option value= "desc">Z - A</option>
                 </select>
-                
+                <select>
+                    <option value= "Rating">Rating</option>
+                    <option value= "rating-asc">Ascendente</option>
+                    <option value= "rating-desc">Descendente</option>
+                </select>
+                <select>
+                    <option value= "Generos">Generos</option>
+                    <option value= "All">Todos</option>
+                    { allGenres?.map(el => (
+                            <option key={el.id} value={el.name}>{el.name}</option>
+                            ))
+                    }
+                    
+                </select>
+            </div>
             <Paginated 
                 gamesxPage={gamesxPage} 
                 allVideogames={allVideogames.length} 
                 paginated={paginado}
             />
-                {
-                    actualGames && actualGames.map(el =>{
-                      return ( 
+            {
+                actualGames && actualGames.map(el =>{
+                    return ( 
                         
-                                <CardGame 
-                                key={el.id}
-                                name= {el.name} 
-                                background_image= {el.background_image} 
-                                genres={el.genres}
-                                id={el.id}/>
+                        <CardGame 
+                            key={el.id}
+                            name= {el.name} 
+                            background_image= {el.background_image} 
+                            genres={el.genres}
+                            id={el.id}
+                        />
                         
-                      )
-                    })
-                }
-            </div>
+                    )
+                })
+            }
         </div>
     )
 }
