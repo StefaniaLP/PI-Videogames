@@ -1,13 +1,25 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getVideogames } from "../../actions";
 import { Link } from "react-router-dom";
 import CardGame from '../CardGame/CardGame';
+import Paginated from '../Paginated/Paginated';
 
 export default function Home(){
     const dispatch = useDispatch()
     const allVideogames = useSelector ((state)=> {return state.videogames})
+    const [actualPage, SetActualPage] = useState(1)
+    const [gamesxPage] = useState(15) //15
+    const indexLastGame= actualPage*gamesxPage //15
+    const indexFirstGame = indexLastGame- gamesxPage // 0
+    const actualGames = allVideogames.slice(indexFirstGame,indexLastGame)
+
+    console.log ("gamexpage", gamesxPage)
+    console.log ("allVideogames.len", allVideogames.length)
+    const paginado = (pageNumber) => {
+        SetActualPage (pageNumber)
+    }
     useEffect( () => {
         dispatch(getVideogames())
     }, [dispatch])
@@ -30,9 +42,14 @@ export default function Home(){
                     <option value= "asc">Ascendente</option>
                     <option value= "desc">Descendente</option>
                 </select>
-                <p>{console.log(allVideogames)}</p>
+                
+            <Paginated 
+                gamesxPage={gamesxPage} 
+                allVideogames={allVideogames.length} 
+                paginated={paginado}
+            />
                 {
-                    allVideogames && allVideogames.map(el =>{
+                    actualGames && actualGames.map(el =>{
                       return ( 
                         
                                 <CardGame 
