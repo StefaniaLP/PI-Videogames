@@ -3,5 +3,42 @@
     background-repeat: no-repeat;
     background-size: cover; 
     background-position: center top; 
-    height: 100vh;
+    
+}
+.login {
+    background: linear-gradient(180deg, #0a1d5a 10%, #152130 101%);
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: white;
+    height: 40px;
+    width: 15%;
+    margin-top: 30%;
+    margin-bottom: 5%;
+    padding-left: 3%;
+    padding-right: 3%;
+    border-color: none;
+    border-radius: 5px;
+    border: none;
+}
+
+.login:hover{
+    cursor: pointer;
+    background: #0D141E;
+    color: white;
+    border: 0.1px solid #8E9097;
+}
+
+.tittle {
+   
+    color: whitesmoke;
+    
+    
+}
+
+.subtittle {
+   
+    color: whitesmoke;
+   
 }
