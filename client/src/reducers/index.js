@@ -1,10 +1,10 @@
-import {GET_VIDEOGAMES, GET_GENRES, FILTER_BY_GENRE, FILTER_BY_CREATOR, SORT_ALPHABETICALLY, SORT_BY_RATING}  from "../actions";
+import {GET_VIDEOGAMES, GET_GENRES, FILTER_BY_GENRE, FILTER_BY_CREATOR, SORT_ALPHABETICALLY, SORT_BY_RATING, GET_BY_NAME, POST_GAME, GET_ALL_PLATFORMS}  from "../actions";
 
 const initialState = {
    videogames:  [],
    copy:[],
    genres: [],
-   
+   platforms:[],
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -15,32 +15,39 @@ export default function rootReducer(state = initialState, action) {
           videogames: action.payload,
           copy: action.payload,
           //me hago la copia de todos los videogames en los dos estados(videogames y copy)
-      };
-      
+        };
+      case GET_BY_NAME:
+         return {
+                ...state,
+                videogames: action.payload
+            };
       case GET_GENRES:
          return {
             ...state,
             genres: action.payload.data
 
-      };
-
+        };
+      case GET_ALL_PLATFORMS:
+         return {
+            ...state,
+            platforms: action.payload
+        };
+    
       case FILTER_BY_GENRE :
-               
-         
          const gamesAPI = state.copy.filter(el => el.genres.includes(action.payload))
          const gamesDB = state.copy.filter( function(el) {  
-          for(let i = 0; i < el.genres.length; i++){
-            if(el.genres[i].name === action.payload){
+            for(let i = 0; i < el.genres.length; i++){
+                if(el.genres[i].name === action.payload){
                   return el
+                }
             }
-         }
-         })
+            })
          const all = gamesAPI.concat(gamesDB)
 
          return {
             ...state,
             videogames: action.payload === "All" ? state.copy :all
-         }
+        };
          
          
       case FILTER_BY_CREATOR:
@@ -50,7 +57,7 @@ export default function rootReducer(state = initialState, action) {
          return {
            ...state,
            videogames: action.payload === "All" ? state.copy : dataFiltrada
-         }
+        };
 
          
       case SORT_ALPHABETICALLY:
@@ -76,7 +83,7 @@ export default function rootReducer(state = initialState, action) {
          return {
              ...state,
              videogames: sort
-         };
+        };
       
       case SORT_BY_RATING:
          let orderbyRat = action.payload === "Rating-asc"|| action.payload === "" ?
@@ -101,10 +108,16 @@ export default function rootReducer(state = initialState, action) {
          return {
              ...state,
              videogames: orderbyRat
-         };
+        };
+
+        case POST_GAME:
+            return{
+                ...state
+        };
+           
 
       default:
-         return {...state};
-   }
+        return {...state};
+    }
 }  
       

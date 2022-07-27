@@ -5,6 +5,7 @@ import { getVideogames, getGenres , filterByGenre, filterByCreator, sortAlphabet
 import { Link } from "react-router-dom";
 import CardGame from '../CardGame/CardGame';
 import Paginated from '../Paginated/Paginated';
+import SearchBar from '../SearchBar/SearchBar';
 
 
 export default function Home(){
@@ -52,6 +53,7 @@ export default function Home(){
         dispatch(sortAlphabetically(e.target.value))
         SetActualPage(1);
         SetSort(`Ordenado por: ${e.target.value}`)
+        console.log("sort",sort)
     }
 
     function handleSortRating(e){
@@ -70,6 +72,7 @@ export default function Home(){
             <h1>VIDEOGAMES</h1>
             <br></br>
             <div>  
+                
                 <label>Filtrar:  </label>
                 <select onChange={(e)=> handleFilterByGenre(e)}>
                     <option value= "All" >Todos los generos</option>
@@ -105,6 +108,7 @@ export default function Home(){
                 allVideogames={allVideogames.length} 
                 paginated={paginado}
             />
+            <SearchBar />
             {
                 actualGames && actualGames.map(el =>{
                     return ( 
