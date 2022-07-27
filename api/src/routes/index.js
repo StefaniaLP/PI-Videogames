@@ -37,7 +37,7 @@ const getApiVideogames = async ()=> {
             released: e.released,
             rating: e.rating,
             genres: e.genres.map((e) => {return e.name;}),
-          platform: e.platforms.map((e) => e.platform.name),
+            platform: e.platforms.map((e) => e.platform.name),
         }
     })
     //console.log ("miapi", myApiVideogames)
@@ -129,7 +129,7 @@ const getGenre = async ()=> {
     Genre.bulkCreate(genresList);
 
     const allGenre = await Genre.findAll()
-    // console.log("ALLGENRES", allGenre)
+    //console.log("ALLGENRES", allGenre)
     return allGenre
     }
       
@@ -141,11 +141,27 @@ const getGenre = async ()=> {
 router.get("/genres", async (req, res)=>{
     const genr = await getGenre();
     try {
-        //console.log("GENRES", genr)
+        console.log("GENRES", genr)
         res.status(200).json(genr)
     } catch (error) {
         res.status(404).send("No se encontraron generos")
     }
+})
+
+router.get('/platforms', async (req, res, next) => {
+
+    const all = await getApiVideogames();
+    const platf = [];
+    all.map(el => el.platform.map(p => {
+        if(!platf.includes(p)) {
+            platf.push(p)
+            }
+        })
+    )
+    
+    platf.length ? res.status(200).json(platf) : res.status(404).send('Error: no hay platforms')
+
+       
 })
 
 router.post(PATH,  async (req, res)=>{
