@@ -8,6 +8,7 @@ export const FILTER_BY_CREATOR= "FILTER_BY_CREATOR"
 export const SORT_ALPHABETICALLY= "SORT_ALPHABETICALLY"
 export const SORT_BY_RATING= "SORT_BY_RATING"
 export const POST_GAME = 'POST_GAME';
+export const GET_DETAIL= "GET_DETAIL"
 
 export function getVideogames() {
     return async function (dispatch) {
@@ -111,6 +112,21 @@ export function getByName(name){
     }
 }
 
+export function getDetail(id){
+    return async function(dispatch){
+        try {
+            let json= await axios.get(`http://localhost:3001/videogames/${id}`)
+        return dispatch({
+            type: GET_DETAIL,
+            payload: json.data,
+        })
+        } catch (error) {
+            console.log(error)
+            alert("No hay detalle para este id")
+        }
+        
+    }
+}
 export function postVideogame(payload){
     return async function (dispatch){
         const pos = await axios.post("http://localhost:3001/videogames", payload)

@@ -1,10 +1,11 @@
-import {GET_VIDEOGAMES, GET_GENRES, FILTER_BY_GENRE, FILTER_BY_CREATOR, SORT_ALPHABETICALLY, SORT_BY_RATING, GET_BY_NAME, POST_GAME, GET_ALL_PLATFORMS}  from "../actions";
+import {GET_VIDEOGAMES, GET_GENRES, FILTER_BY_GENRE, FILTER_BY_CREATOR, SORT_ALPHABETICALLY, SORT_BY_RATING, GET_BY_NAME, POST_GAME, GET_ALL_PLATFORMS, GET_DETAIL}  from "../actions";
 
 const initialState = {
    videogames:  [],
    copy:[],
    genres: [],
    platforms:[],
+   detail:[]
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -114,7 +115,12 @@ export default function rootReducer(state = initialState, action) {
             return{
                 ...state
         };
-           
+        
+        case GET_DETAIL:
+            return{
+                ...state,
+                detail: action.payload
+        };
 
       default:
         return {...state};

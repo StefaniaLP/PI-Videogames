@@ -13,7 +13,7 @@ export default function CardGame({ name, background_image, genres, id, rating })
         <p>{rating}</p>
         <div className="img-game">
           <img
-            src={background_image}
+            src={background_image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZYqH2kKcngIzKCzsyH_aVIs39vxfzkeJwJg&usqp=CAU"}
             alt={name}
             height="400px"
             width="400px"
@@ -28,7 +28,7 @@ export default function CardGame({ name, background_image, genres, id, rating })
           </p>   
         </div>
 
-        <Link to="/videogames" >
+        <Link to={`/videogames/${id}`}>
           <button className="card-button">Ver mas detalle </button>
         </Link>
       </div>
