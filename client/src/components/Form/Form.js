@@ -9,7 +9,7 @@ export default function Form (){
     const history =useHistory()// me redirige a la ruta que yo le diga
     const generos= useSelector((state)=> state.genres) 
     const plataformas= useSelector((state)=> state.platforms) 
-    //console.log("generos", generos)
+    //console.log("generos", generos) 
     //console.log("plataformas", plataformas)
     const [input, setInput]= useState({
         name: "",
