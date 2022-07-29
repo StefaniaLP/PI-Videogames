@@ -52,7 +52,7 @@ export default function rootReducer(state = initialState, action) {
          
       case FILTER_BY_CREATOR:
          //en caso de querer que los filtros sean independientes debo poner state.copy en el ternario tanto en la parte if como en el else
-         const dataFiltrada = action.payload === 'Creado' ? state.videogames.filter(f => f.createdDB) : state.videogames.filter(fil => !fil.createdDB)
+         const dataFiltrada = action.payload === 'Creado' ? state.copy.filter(f => f.createdDB) : state.copy.filter(fil => !fil.createdDB)
          
          return {
            ...state,

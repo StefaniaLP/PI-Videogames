@@ -141,7 +141,7 @@ const getGenre = async ()=> {
 router.get("/genres", async (req, res)=>{
     const genr = await getGenre();
     try {
-        console.log("GENRES", genr)
+        //console.log("GENRES", genr)
         res.status(200).json(genr)
     } catch (error) {
         res.status(404).send("No se encontraron generos")

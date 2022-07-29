@@ -10,15 +10,13 @@ export default function SearchBar (){
     function handleInputChange (e){
         e.preventDefault()
         setName (e.target.value)
-       
-       
     }
     function handleSubmit (e){
         e.preventDefault()
         dispatch( getByName(name) )
         setName("")
-     
     }
+    
     return (
         <div>
             <input type='text' placeholder='Buscar...' onChange={(e)=> handleInputChange(e)}/> 
