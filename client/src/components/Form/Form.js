@@ -196,6 +196,7 @@ export default function Form (){
                         type="text" 
                         value={input.background_image} 
                         name="background_image" 
+                        placeholder="URL"
                         onChange={(e)=> {handleChange(e)}} 
                     />
                 </div>

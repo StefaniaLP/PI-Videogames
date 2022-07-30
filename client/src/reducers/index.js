@@ -5,7 +5,7 @@ const initialState = {
    copy:[],
    genres: [],
    platforms:[],
-   detail:[]
+   detail:{}
 }
 
 export default function rootReducer(state = initialState, action) {
