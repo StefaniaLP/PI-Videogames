@@ -1,16 +1,9 @@
 const { Router } = require('express');
 const axios = require ('axios');
 const {Videogame, Genre} = require('../db');
-
 const { YOUR_API_KEY } = process.env;
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
-
 
 const router = Router();
-
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
 
 const getApiVideogames = async ()=> {
     const apiVideogames = await axios.get (`https://api.rawg.io/api/games?key=${YOUR_API_KEY}`)
@@ -68,13 +61,13 @@ const getAllVideogames= async () => {
 
 const PATH= "/videogames"
 
-router.get( `${PATH}/:id`, async (req, res) =>{
+/*router.get( "/videogames/:id", async (req, res) =>{
     const {id}= req.params
 
-    let allVideogames= await getAllVideogames();
-
-    let idFilter = await allVideogames.filter( e => e.id === parseInt(id) )
-        
+    let todos= await getAllVideogames();
+   
+    let idFilter =  todos.filter( (e) => id === e.id)
+    console.log("idFilter",idFilter)
     if (idFilter.length>0) {
         //console.log(idFilter)
         const detail = await axios.get (`https://api.rawg.io/api/games/${id}?key=${YOUR_API_KEY}`)
@@ -86,7 +79,45 @@ router.get( `${PATH}/:id`, async (req, res) =>{
     } else {
         res.status(404).send (`El ID ${id} no se encuentra`)
     }
+            //DEJO DE FUNCIONAR
+})*/
 
+router.get('/videogames/:id', async (req, res)=> {
+    const {id} = req.params
+    if(!id.includes('-')) {
+        const apiId = await axios.get(`https://api.rawg.io/api/games/${id}?key=${YOUR_API_KEY}`)
+        const dat = await apiId.data
+        let vg = {
+            id: dat.id,
+            name: dat.name,
+            description: dat.description_raw,
+            released: dat.released,
+            rating: dat.rating, 
+            genres: dat.genres.map( el => el.name),
+            platforms: dat.platforms.map( el => el.platform.name),
+            background_image: dat.background_image,
+        }
+        vg?
+        res.status(200).json(vg) :
+        res.status(404).send('No se encuentra el ID')
+    }
+    else {
+        let gameEncontrado = await Videogame.findByPk(id, {
+            include: {
+                model: Genre,
+                attributes: ['name'],
+                through : {
+                    attributes: [],
+                },
+                
+            }
+        })
+       
+
+        gameEncontrado?
+        res.status(200).json(gameEncontrado):
+        res.status(404).send('No se encuentra el ID')
+    }
 })
 
 router.get (PATH, async (req, res)=>{
