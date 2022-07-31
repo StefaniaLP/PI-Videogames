@@ -11,3 +11,17 @@
     background-repeat: no-repeat;
     
 }
+
+.tittle{
+    background: linear-gradient(180deg, #263af2 10%, #152130 50%);
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: bold;
+    font-size: 50px;
+    text-transform: uppercase;
+    color: white;
+    border: none;
+}
+.subtittle{
+    color: white;
+    font-weight: 400;
+}
