@@ -1,4 +1,4 @@
-import {GET_VIDEOGAMES, GET_GENRES, FILTER_BY_GENRE, FILTER_BY_CREATOR, SORT_ALPHABETICALLY, SORT_BY_RATING, GET_BY_NAME, POST_GAME, GET_ALL_PLATFORMS, GET_DETAIL}  from "../actions";
+import {GET_VIDEOGAMES, GET_GENRES, FILTER_BY_GENRE, FILTER_BY_CREATOR, SORT_ALPHABETICALLY, SORT_BY_RATING, GET_BY_NAME, POST_GAME, GET_ALL_PLATFORMS, GET_DETAIL, GET_NAME}  from "../actions";
 
 const initialState = {
    videogames:  [],
@@ -17,11 +17,23 @@ export default function rootReducer(state = initialState, action) {
           copy: action.payload,
           //me hago la copia de todos los videogames en los dos estados(videogames y copy)
         };
-      case GET_BY_NAME:
-         return {
-                ...state,
-                videogames: action.payload
-            };
+    //   case GET_BY_NAME:
+    //      return {
+    //             ...state,
+    //             videogames: action.payload
+    //         };
+    case GET_NAME:
+      let nombres =
+        action.payload === ""
+          ? state.copy
+          : state.copy.filter((e) =>
+              e.name.toLowerCase().includes(action.payload.toLowerCase())
+            );
+      return {
+        ...state,
+        videogames: nombres,
+      };
+
       case GET_GENRES:
          return {
             ...state,

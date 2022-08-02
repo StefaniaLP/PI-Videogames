@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import CardGame from '../CardGame/CardGame';
 import Paginated from '../Paginated/Paginated';
 import SearchBar from '../SearchBar/SearchBar';
+import Loader from '../Loader/Loader';
 import "./Homec.css"
 
 
@@ -16,6 +17,7 @@ export default function Home(){
     const [actualPage, SetActualPage] = useState(1)
     const [sort, SetSort]=useState("")
     const [gamesxPage] = useState(15) //15
+    const [charge, setCharge] = useState(false);
     const indexLastGame= actualPage*gamesxPage //15
     const indexFirstGame = indexLastGame- gamesxPage // 0
     const actualGames = allVideogames.slice(indexFirstGame,indexLastGame)
@@ -39,10 +41,14 @@ export default function Home(){
         dispatch(getGenres());
     },[dispatch])
 
-    /*function handleClick (e){
-        e.preventDefault()
-        dispatch(getVideogames())
-    }  */
+    useEffect(() => {
+        setCharge(true);
+        setTimeout(() => {
+          setCharge(false);
+        }, 10000);
+        dispatch(getVideogames());
+      }, [dispatch]
+    );
 
     function handleFilterByGenre (e) {
         e.preventDefault()
@@ -73,11 +79,13 @@ export default function Home(){
     <div className='homegral'>
         <div className='containerHome'>
             <div className='menuNav'>
-                <h1 className='tit'>Listado de videogames ...</h1>
-                <br></br>
                 <div className='search'>
-                    <SearchBar />
+                    <SearchBar 
+                    SetActualPage={SetActualPage}
+                    />
                 </div> 
+                <h1 className='tit'>Listado de videogames ...</h1>
+                
                 <div className='paginado'>
                     <Paginated 
                 
@@ -126,7 +134,12 @@ export default function Home(){
             </div>
             
             <div className="card_gral">
-            {
+            {   
+                charge ? (
+                    <div>
+                        <Loader />
+                    </div>
+                ) :
                 actualGames && actualGames.map(el =>{
                     return ( 
                         

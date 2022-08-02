@@ -1,27 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getByName } from '../../actions';
+import { getName , getVideogames} from '../../actions';
 import './SearchBarc.css'
 
-export default function SearchBar (){
+export default function SearchBar ({SetActualPage}){
     const dispatch = useDispatch()
-    var [name, setName] = useState ("");
+    const [name, setName] = useState ('');
+
+
+    useEffect (()=>{
+        dispatch(getVideogames())
+    },[dispatch])
 
     function handleInputChange (e){
-        e.preventDefault()
-        setName (e.target.value)
-    }
-    function handleSubmit (e){
-        e.preventDefault();
-        dispatch( getByName(name) );
-        setName("");
+        dispatch(getName(e))
+        SetActualPage(1)
+
     }
     
+    
     return (
-        <form>
-            <input type='text' placeholder='Buscar...' onChange={(e)=> handleInputChange(e)} className='inp'/> 
-            <button type='submit' onClick={(e)=> handleSubmit(e)} className='subm'>Buscar</button>
-        </form>
+        <div >
+            <div>
+                <input 
+                    type='text' 
+                    placeholder='Buscar...'
+                    value={name}
+                    onChange={(e)=> {setName(e.target.value); handleInputChange(e.target.value);}} className='inp'
+                /> 
+            </div>
+            
+           
+        </div>
     )
 }

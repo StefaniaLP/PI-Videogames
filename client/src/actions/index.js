@@ -9,6 +9,7 @@ export const SORT_ALPHABETICALLY= "SORT_ALPHABETICALLY"
 export const SORT_BY_RATING= "SORT_BY_RATING"
 export const POST_GAME = 'POST_GAME';
 export const GET_DETAIL= "GET_DETAIL"
+export const GET_NAME="GET_NAME";
 
 export function getVideogames() {
     return async function (dispatch) {
@@ -95,22 +96,28 @@ export function sortByRating(payload) {
     }
 }
 
-export function getByName(name){ 
-    // mi payload va a ser el name que me pasen por query
-    return async function (dispatch){
-        try {
-             let det= await axios.get(`http://localhost:3001/videogames?name=${name}`)
-            return dispatch({
-            type: GET_BY_NAME,
-            payload: det.data, 
-            // aca me devuelve lo que filtre en mi back cuando cree la ruta.
-            })
-        } catch (error) {
-            console.log(error)
-            alert("No se encuentra el videogame")
-        }
-    }
-}
+// export function getByName(name){ 
+//     // mi payload va a ser el name que me pasen por query
+//     return async function (dispatch){
+//         try {
+//              let det= await axios.get(`http://localhost:3001/videogames?name=${name}`)
+//             return dispatch({
+//             type: GET_BY_NAME,
+//             payload: det.data, 
+//             // aca me devuelve lo que filtre en mi back cuando cree la ruta.
+//             })
+//         } catch (error) {
+//             console.log(error)
+//             alert("No se encuentra el videogame")
+//         }
+//     }
+// }
+export function getName(name) {
+    return {
+      type: GET_NAME,
+      payload: name,
+    };
+  }
 
 export function getDetail(id){
     return async function(dispatch){

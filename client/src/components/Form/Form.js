@@ -139,6 +139,7 @@ export default function Form (){
 
     return (
         <div className="contenedorF">
+            <div className="contenedor2">
             <div className="detail">
                 <Link to="/home"><button className="butt" id="volver">Volver</button></Link>
                 <h1 className="tittleForm">Crea un videogame!!!</h1>
@@ -277,6 +278,7 @@ export default function Form (){
                         <button className="butt">Cancelar</button>
                     </Link>
                 </form>
+            </div>
             </div>
         </div>
     )

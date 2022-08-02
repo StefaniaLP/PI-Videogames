@@ -36,11 +36,11 @@
 }
 
 .search{
-    position:relative;
+   position:relative;
    flex-direction: row;
    left: 48%;
    right: 50%;
-   top: 2rem;
+   top: 0rem;
 }
 .paginado{
     top: 4rem;
