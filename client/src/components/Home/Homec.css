@@ -3,8 +3,6 @@
     flex-direction: column;
     height: 100%;
     width: 100%;
-    
- 
 }
 
 .containerHome{
@@ -13,9 +11,8 @@
     background-image: url(../imagenes/vg3.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 210vh; 
-    width: 210vh;
-
+    height: 220vh; 
+    width: 205vh;
 }
 .menuNav{
     
@@ -25,7 +22,6 @@
     font-weight: bold;
     text-transform: uppercase;
     color: #ffffff;
-    
 }
 .tit{
     font-size: 60px;
@@ -47,25 +43,15 @@
    top: 2rem;
 }
 .paginado{
-  
-    display: flex;
-    flex-wrap: wrap;
-    position:relative;
-    flex-direction: row;
-    position:relative;
-    top: -1rem;
-    left: 45%;
+    top: 4rem;
     right: 50%;
     height: 10%;
-    width: 22%;
-    justify-content: space-evenly;
+    width: 18%;
     background-color: #1a2433;
-    border: 1px solid #8E9097;
     border-radius: 5px;
-    padding-left: 0,5%;
-    margin-top: 4%;
+    padding-left: 1;
+    margin-top: 1%;
     margin-bottom: 1%;
-    
 }
 .menuFilterAndSort{
     background-color: #1a2433de;
@@ -82,8 +68,6 @@
     padding-left: 2%;
     padding-right: 2%;
     padding-bottom: 2%;
-    
-
 }
 
 .lab {
@@ -128,8 +112,6 @@
     text-transform: uppercase;
     background: #1a2433;
 }
-
-
 
 .crear{
     background-color: #10063f;
@@ -186,8 +168,8 @@
     flex-wrap: wrap;
     position:relative;
     flex-direction: row;
-    left: 18%;
-    top: -34rem;
+    left: 17%;
+    top: -32em;
     height: 100%;
     width: 80vw;
     justify-content: space-evenly;

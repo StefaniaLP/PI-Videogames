@@ -1,6 +1,6 @@
 .card{
     
-    width: 150px;
+    width: 140px;
     height: 180px;
     position: relative;
     padding: 3rem;
@@ -58,7 +58,7 @@
 .card .back{
    transform: perspective(600px) rotateY(180deg);
    background: rgba(57, 3, 82, 0.719) ;
-   padding: 15px;
+   padding: 12px;
    color: #f3f3f3;
    display: flex;
    flex-direction: column;
@@ -76,9 +76,9 @@
     color: #f3f3f3;
 }
 .card .back h3{
-    font-size: 30px;
+    font-size: 28px;
     margin-top: 20px;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-decoration: underline;
     text-shadow: 2px 4px 10px black;
 }

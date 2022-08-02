@@ -6,7 +6,7 @@ import img from "./img.png"
 import './Detailc.css'
 
 export default function Detail (props) {
-    console.log("props",props)
+    //console.log("props",props)
     const dispatch = useDispatch();
     const {id} = props.match.params
    
@@ -14,7 +14,7 @@ export default function Detail (props) {
         dispatch( getDetail(id)) // sino uso el useParams(), lo equivalente seria poner props.match.params.id y poner como parametro a Detail (props)
     }, [dispatch,id])
     let detok = useSelector ((state)=> {return state.detail})
-    console.log("detOK", detok) 
+    //console.log("detOK", detok) 
     return(
         <div className="contDetail">
             <div className="d"> 

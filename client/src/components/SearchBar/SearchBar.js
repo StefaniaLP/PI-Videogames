@@ -6,22 +6,22 @@ import './SearchBarc.css'
 
 export default function SearchBar (){
     const dispatch = useDispatch()
-    let [name, setName] = useState ("");
+    var [name, setName] = useState ("");
 
     function handleInputChange (e){
         e.preventDefault()
         setName (e.target.value)
     }
     function handleSubmit (e){
-        e.preventDefault()
-        dispatch( getByName(name) )
-        setName("")
+        e.preventDefault();
+        dispatch( getByName(name) );
+        setName("");
     }
     
     return (
-        <div>
-            <input type='text' placeholder='Buscar...' onChange={(e)=> handleInputChange(e)} className='input'/> 
+        <form>
+            <input type='text' placeholder='Buscar...' onChange={(e)=> handleInputChange(e)} className='inp'/> 
             <button type='submit' onClick={(e)=> handleSubmit(e)} className='subm'>Buscar</button>
-        </div>
+        </form>
     )
 }

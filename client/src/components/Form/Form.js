@@ -154,7 +154,7 @@ export default function Form (){
                             onChange={(e)=> {handleChange(e)}}
                             className='inputs'
                         />
-                        {errors.name && (<p>{errors.name}</p> )}
+                        {errors.name && (<p className="err">{errors.name}</p> )}
                     </div>
 
                     <div>
@@ -167,7 +167,7 @@ export default function Form (){
                             onChange={(e)=> {handleChange(e)}}
                             className='inputs'
                         ></textarea>
-                        {errors.description && (<p>{errors.description}</p> )}
+                        {errors.description && (<p className="err">{errors.description}</p> )}
                     </div>
 
                     <div>
@@ -179,7 +179,7 @@ export default function Form (){
                             onChange={(e)=> {handleChange(e)}}
                             className='inputs'
                         />
-                        {errors.rating && (<p>{errors.rating}</p> )}
+                        {errors.rating && (<p className="err">{errors.rating}</p> )}
                     </div>
 
                     <div>
@@ -191,7 +191,7 @@ export default function Form (){
                             onChange={(e)=> {handleChange(e)}}
                             className='inputs'
                         />
-                        {errors.released && (<p >{errors.released}</p>)}
+                        {errors.released && (<p className="err" >{errors.released}</p>)}
 
                     </div>
 
@@ -228,7 +228,7 @@ export default function Form (){
                                 </div>
                             ))} 
                         </li></ul>
-                        {errors.genres && (<p>{errors.genres}</p> )}
+                        {errors.genres && (<p className="err">{errors.genres}</p> )}
                     </div>
                     
                     <div>
@@ -250,7 +250,7 @@ export default function Form (){
                                 </div>
                                 ))} 
                             </li></ul>
-                            {errors.platforms && (<p>{errors.platforms}</p> )}
+                            {errors.platforms && (<p className="err">{errors.platforms}</p> )}
                     </div>
 
                     
