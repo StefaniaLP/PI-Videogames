@@ -9,9 +9,10 @@ export default function Paginated ({gamesxPage, allVideogames, paginated}){
     console.log("pagenumbeeeeeeeeeeeeeeeeeeeeer",pageNumber)
     return ( 
         <div> 
-            <ul className='pag'> Paginas:    
+            <ul className='paggral'> Paginas:    
                
-                {pageNumber.length >1 && pageNumber.map( n => 
+                {pageNumber.length >1 && pageNumber.map( n =>
+                
                 { return(
                     <button key = {n} onClick={() => paginated(n)} className='num'>{n}</button>
                     )

@@ -24,8 +24,13 @@ export default function Home(){
     //console.log ("gamexpage", gamesxPage)
     //console.log ("allVideogames.len", allVideogames.length)
     const paginado = (pageNumber) => {
+         console.log("pageNumber", pageNumber)
         SetActualPage (pageNumber)
+        console.log("set", SetActualPage)
     }
+    
+   
+
     useEffect( () => {
         dispatch(getVideogames())
     }, [dispatch])

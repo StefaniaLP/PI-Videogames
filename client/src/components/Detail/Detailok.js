@@ -16,38 +16,37 @@ export default function Detail (props) {
     let detok = useSelector ((state)=> {return state.detail})
     console.log("detOK", detok) 
     return(
-        <div className="conteinerDetail">
-            <div > 
-                <div className="detail">
-                    <h1 className="tittleDetail">{detok.name}</h1>
-                    <h4 className="subtit">Rating: </h4>
-                    <p className="subdetail">{detok.rating}</p>
-                    <h4 className="subtit">Fecha de creacion: </h4>
-                    <p className="subdetail">{detok.released}</p>
-                    <img
+        <div className="contDetail">
+            <div className="d"> 
+                <  Link to= "/home"><button className="buttD">Volver</button></Link> 
+                <h1 className="tittleDetail">{detok.name}</h1>
+                <img
                         
                         src={detok.background_image || img}
                         alt={detok.name}
-                        width="400px"
+                        width="700px"
                         height="400px"
+                        className="imgD"
                     />
-                </div>
-
-                <div className="detail">
-                    <h4 className="subtit">Descripcion</h4>
-                    <p className="subdetail">{detok.description}</p>
-                    
-                    <h4 className="subtit">Generos:</h4>
-                        <p className="subdetail">{detok.genres?.map(g => (g.name ? g.name : g)).join(", ")}</p>
-                    
-                    <h4 className="subtit">Plataformas:</h4>
-                    <p className="subdetail">{
-                    typeof detok.platforms === "string" ? detok.platforms:
-                    detok.platforms?.map(g => (g.name ? g.name : g)).join(", ")}</p>
-                </div>
+                <h4 className="subtit">Rating: </h4>
+                <p className="subdetailD">{detok.rating}</p>
+                <h4 className="subtit">Fecha de creacion: </h4>
+                <p className="subdetailD">{detok.released}</p>
                 
+                <h4 className="subtit">Descripcion</h4>
+                <p className="subdetailD">{detok.description}</p>
+                    
+                <h4 className="subtit">Generos:</h4>
+                    <p className="subdetailD">{detok.genres?.map(g => (g.name ? g.name : g)).join(", ")}</p>
+                    
+                <h4 className="subtit">Plataformas:</h4>
+                    <p className="subdetailD">{
+                        typeof detok.platforms === "string" ? detok.platforms:
+                        detok.platforms?.map(g => (g.name ? g.name : g)).join(", ")}
+                    </p>
+               
                 
-                <Link to= "/home"><button className="butt">Volver</button></Link>  
+                 
             </div>      
         </div>
     )

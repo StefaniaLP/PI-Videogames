@@ -48,20 +48,24 @@
 }
 .paginado{
   
-   
-   position:relative;
-   flex-direction: row;
-   top: 0rem;
-   left: 45%;
-   right: 50%;
-   background-color: #1a2433;
-   border: 1px solid #8E9097;
-   border-radius: 5px;
-   height: 10%;
-   width: 22%;
-   padding-left: 0,5%;
-   margin-top: 4%;
-   margin-bottom: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    position:relative;
+    flex-direction: row;
+    position:relative;
+    top: -1rem;
+    left: 45%;
+    right: 50%;
+    height: 10%;
+    width: 22%;
+    justify-content: space-evenly;
+    background-color: #1a2433;
+    border: 1px solid #8E9097;
+    border-radius: 5px;
+    padding-left: 0,5%;
+    margin-top: 4%;
+    margin-bottom: 1%;
+    
 }
 .menuFilterAndSort{
     background-color: #1a2433de;
@@ -189,8 +193,6 @@
     justify-content: space-evenly;
     margin-top: 2px;
     margin-bottom: 5px;
-    background-size: cover;
-    
        
 } 
 
