@@ -3,6 +3,7 @@ import { Link} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getDetail } from "../../actions";
 import img from "./img.png"
+import './Detailc.css'
 
 export default function Detail (props) {
     console.log("props",props)
@@ -15,30 +16,39 @@ export default function Detail (props) {
     let detok = useSelector ((state)=> {return state.detail})
     console.log("detOK", detok) 
     return(
-        <div>
-            <h1>{detok.name}</h1>
-            <p>Rating {detok.rating}</p>
-            <div>
-                <img
+        <div className="conteinerDetail">
+            <div > 
+                <div className="detail">
+                    <h1 className="tittleDetail">{detok.name}</h1>
+                    <h4 className="subtit">Rating: </h4>
+                    <p className="subdetail">{detok.rating}</p>
+                    <h4 className="subtit">Fecha de creacion: </h4>
+                    <p className="subdetail">{detok.released}</p>
+                    <img
+                        
+                        src={detok.background_image || img}
+                        alt={detok.name}
+                        width="400px"
+                        height="400px"
+                    />
+                </div>
+
+                <div className="detail">
+                    <h4 className="subtit">Descripcion</h4>
+                    <p className="subdetail">{detok.description}</p>
                     
-                    src={detok.background_image || img}
-                    alt={detok.name}
-                    width="400px"
-                    height="400px"
-                />
-            </div>
-            <h3>Descripcion</h3>
-            <h5>{detok.description}</h5>
-            <h4>Fecha de creacion </h4>
-                <span>{detok.released}</span>
-            <h4>Generos:</h4>
-                <p>{detok.genres?.map(g => (g.name ? g.name : g)).join(", ")}</p>
-            <h4>Plataformas:</h4>
-               <p>{
-              typeof detok.platforms === "string" ? detok.platforms:
-               detok.platforms?.map(g => (g.name ? g.name : g)).join(", ")}</p>
-            
-            <Link to= "/home"><button>Volver</button></Link>        
+                    <h4 className="subtit">Generos:</h4>
+                        <p className="subdetail">{detok.genres?.map(g => (g.name ? g.name : g)).join(", ")}</p>
+                    
+                    <h4 className="subtit">Plataformas:</h4>
+                    <p className="subdetail">{
+                    typeof detok.platforms === "string" ? detok.platforms:
+                    detok.platforms?.map(g => (g.name ? g.name : g)).join(", ")}</p>
+                </div>
+                
+                
+                <Link to= "/home"><button className="butt">Volver</button></Link>  
+            </div>      
         </div>
     )
 }

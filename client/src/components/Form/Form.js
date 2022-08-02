@@ -138,136 +138,146 @@ export default function Form (){
     }
 
     return (
-        <div>
-            <Link to="/home"><button>Volver</button></Link>
-            <h1>Crea un videogame</h1>
-            <h5>Aquellas propiedades marcadas con * son obligatorias</h5>
-            <form onSubmit={(e)=> handleSubmit(e)}>
-                <div>
-                    <label>Nombre*: </label>
-                    <input 
-                        type="text" 
-                        value={input.name} 
-                        name="name" 
-                        required
-                        onChange={(e)=> {handleChange(e)}}
-                    />
-                    {errors.name && (<p>{errors.name}</p> )}
-                </div>
+        <div className="contenedorF">
+            <div className="detail">
+                <Link to="/home"><button className="butt" id="volver">Volver</button></Link>
+                <h1 className="tittleForm">Crea un videogame!!!</h1>
+                <h5 className="sub">Aquellaspropiedades marcadas con * son obligatorias</h5>
+                <form onSubmit={(e)=> handleSubmit(e)} >
+                    <div>
+                        <label className="labels">Nombre: *</label>
+                        <input 
+                            type="text" 
+                            value={input.name} 
+                            name="name" 
+                            required
+                            onChange={(e)=> {handleChange(e)}}
+                            className='inputs'
+                        />
+                        {errors.name && (<p>{errors.name}</p> )}
+                    </div>
 
-                <div>
-                    <label>Descripcion*: </label>
-                    <textarea 
-                        type="text" 
-                        value={input.description} 
-                        name="description" 
-                        required
-                        onChange={(e)=> {handleChange(e)}}
-                    ></textarea>
-                    {errors.description && (<p>{errors.description}</p> )}
-                </div>
+                    <div>
+                        <label className="labels">Descripcion: * </label>
+                        <textarea 
+                            type="text" 
+                            value={input.description} 
+                            name="description" 
+                            required
+                            onChange={(e)=> {handleChange(e)}}
+                            className='inputs'
+                        ></textarea>
+                        {errors.description && (<p>{errors.description}</p> )}
+                    </div>
 
-                <div>
-                    <label>Rating: </label>
-                    <input 
-                        type="number" 
-                        value={input.rating} 
-                        name="rating" 
-                        onChange={(e)=> {handleChange(e)}}
-                    />
-                    {errors.rating && (<p>{errors.rating}</p> )}
-                </div>
+                    <div>
+                        <label className="labels">Rating: </label>
+                        <input 
+                            type="number" 
+                            value={input.rating} 
+                            name="rating" 
+                            onChange={(e)=> {handleChange(e)}}
+                            className='inputs'
+                        />
+                        {errors.rating && (<p>{errors.rating}</p> )}
+                    </div>
 
-                <div>
-                    <label>Fecha de lanzamiento: </label>
-                    <input 
-                        type="date" 
-                        value={input.released} 
-                        name="released" 
-                        onChange={(e)=> {handleChange(e)}}
-                    />
-                    {errors.released && (<p >{errors.released}</p>)}
+                    <div>
+                        <label className="labels">Fecha de lanzamiento: </label>
+                        <input 
+                            type="date" 
+                            value={input.released} 
+                            name="released" 
+                            onChange={(e)=> {handleChange(e)}}
+                            className='inputs'
+                        />
+                        {errors.released && (<p >{errors.released}</p>)}
 
-                </div>
+                    </div>
 
-                <div>
-                    <label>Imagen: </label>
-                    <input 
-                        type="text" 
-                        value={input.background_image} 
-                        name="background_image" 
-                        placeholder="URL"
-                        onChange={(e)=> {handleChange(e)}} 
-                    />
-                </div>
+                    <div>
+                        <label className="labels">Imagen: </label>
+                        <input 
+                            type="text" 
+                            value={input.background_image} 
+                            name="background_image" 
+                            placeholder="URL"
+                            onChange={(e)=> {handleChange(e)}} 
+                            className='inputs'
+                        />
+                    </div>
 
-                <div>
-                    <label>Generos*: </label>
-                    <select required onChange={(e)=> {handleSelectGen(e)}} > 
-                        <option hidden value=''>Select</option>
-                        { generos?.map(el => (
-                        <option key={el.id} value={el.name} >{el.name}</option>
-                        ))
-                        }
-                    </select>
-                    <ul><li> Generos seleccionadas: 
-                        {input.genres.map( (el)=> (
-                            <div >
-                                <div >{el}
-                                    <button onClick={() => handleDeleteG(el)} key={el} value={el}>
-                                        <p>X</p>
-                                    </button>
+                    <div>
+                        <label className="labels">Generos: * </label>
+                        <select required onChange={(e)=> {handleSelectGen(e)}} className='select'> 
+                            <option hidden value='' className="option">Select</option>
+                            { generos?.map(el => (
+                            <option key={el.id} value={el.name} >{el.name}</option>
+                            ))
+                            }
+                        </select>
+                        <ul><li className="subdetail"> Generos seleccionadas: 
+                            {input.genres.map( (el)=> (
+                                <div >
+                                    <div >{el}
+                                        <button onClick={() => handleDeleteG(el)} key={el} value={el}>
+                                            <p>X</p>
+                                        </button>
+                                    </div>
+                                    
                                 </div>
-                                
-                            </div>
-                        ))} 
-                    </li></ul>
-                    {errors.genres && (<p>{errors.genres}</p> )}
-                </div>
-                
-                <div>
-                    <label>Plataformas*: </label>
-                    <select required onChange={(e)=> {handleSelectPlat(e)}} d> 
-                        <option hidden value=''>Select</option>
-                        { plataformas.data?.map(el => (
-                        <option key={el} value={el} >{el}</option>
-                        ))}
-                    </select>
-                    <ul><li> Plataformas seleccionados: {input.platforms.map( (el)=> (
-                            <div >
-                                <div >{el}
-                                    <button onClick={() => handleDeleteP(el)} key={el} value={el}>
-                                        <p>X</p>
-                                    </button>
-                                </div>  
-                                
-                            </div>
                             ))} 
                         </li></ul>
-                        {errors.platforms && (<p>{errors.platforms}</p> )}
-                </div>
+                        {errors.genres && (<p>{errors.genres}</p> )}
+                    </div>
+                    
+                    <div>
+                        <label className="labels">Plataformas: * </label>
+                        <select required onChange={(e)=> {handleSelectPlat(e)}} className='select'> 
+                            <option hidden value='' className="option">Select</option>
+                            { plataformas.data?.map(el => (
+                            <option key={el} value={el} >{el}</option>
+                            ))}
+                        </select>
+                        <ul><li className="subdetail"> Plataformas seleccionados: {input.platforms.map( (el)=> (
+                                <div >
+                                    <div >{el}
+                                        <button onClick={() => handleDeleteP(el)} key={el} value={el}>
+                                            <p>X</p>
+                                        </button>
+                                    </div>  
+                                    
+                                </div>
+                                ))} 
+                            </li></ul>
+                            {errors.platforms && (<p>{errors.platforms}</p> )}
+                    </div>
 
-                
+                    
 
 
-                <button disabled={input.name === '' || errors.name || 
-                                input.description === '' || errors.description ||
-                                input.genres[0] === '' || errors.genres ||
-                                input.platforms[0] === '' || errors.platforms ||
+                    <button disabled={input.name === '' || errors.name || 
+                                    input.description === '' || errors.description ||
+                                    input.genres[0] === '' || errors.genres ||
+                                    input.platforms[0] === '' || errors.platforms ||
 
-                                (input.rating === ''&& setInput({
-                                    ...input,
-                                    rating: 0.0
-                                })) || errors.rating ||
-                                (input.released === ''&& setInput({
-                                    ...input,
-                                    released: "01/01/1900"
-                                })) 
-                                } 
-                        type="submit">Crear
-                </button>
-                <Link to={'/home'} >Cancelar</Link>
-            </form>
+                                    (input.rating === ''&& setInput({
+                                        ...input,
+                                        rating: 0.0
+                                    })) || errors.rating ||
+                                    (input.released === ''&& setInput({
+                                        ...input,
+                                        released: "01/01/1900"
+                                    })) 
+                                    } 
+                            type="submit"
+                            className="butt">Crear
+                    </button>
+                    <Link to={'/home'} >
+                        <button className="butt">Cancelar</button>
+                    </Link>
+                </form>
+            </div>
         </div>
     )
 }

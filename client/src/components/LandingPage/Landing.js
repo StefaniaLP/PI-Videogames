@@ -5,10 +5,11 @@ import "./Landingc.css";
 export default function Landing() {
   return (
     <div className="container">
-      <h1 className="tittle">VIDEOGAMES</h1>
-      <h3 className="subtittle">By Stefania Peralta</h3>
+      <h1 className="tittle">Videogames</h1>
       <Link to="/home">
-        <button className="button"> Login </button>
+        <button className="butLanding">
+          INGRESAR
+        </button>
       </Link>
     </div>
   );

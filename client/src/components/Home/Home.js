@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import CardGame from '../CardGame/CardGame';
 import Paginated from '../Paginated/Paginated';
 import SearchBar from '../SearchBar/SearchBar';
+import "./Homec.css"
 
 
 export default function Home(){
@@ -62,53 +63,64 @@ export default function Home(){
         SetActualPage(1);
         SetSort(`Ordenado por: ${e.target.value}`)
     }
-    /*let activeClassName = "underline";
-    dentro del Navlink verificar si pongo esto cuando arme el css
-    className={({ isActive }) =>
-              isActive ? activeClassName : undefined*/
+    
     return(
-        <div>
-            <Link to="/videogames">Crear Videojuego</Link>
-            <h1>VIDEOGAMES</h1>
-            <br></br>
-            <div>  
+    <div className='homegral'>
+        <div className='containerHome'>
+            <div className='menuNav'>
+                <h1 className='tit'>Listado de videogames ...</h1>
+                <br></br>
+                <div className='search'>
+                    <SearchBar />
+                </div> 
+                <div className='paginado'>
+                    <Paginated 
                 
-                <label>Filtrar:  </label>
-                <select onChange={(e)=> handleFilterByGenre(e)}>
-                    <option value= "All" >Todos los generos</option>
+                        gamesxPage={gamesxPage} 
+                        allVideogames={allVideogames.length} 
+                        paginated={paginado}
+                    />
+                </div>
+            </div>
+           
+        
+            <div className='menuFilterAndSort'>  
+                
+                <label className='lab'>Filtrar:  </label>
+                <select onChange={(e)=> handleFilterByGenre(e)} className='selec'>
+                    <option value= "All" className='opt'>Todos los generos</option>
                     { allGenres?.map(el => (
-                        <option key={el.id} value={el.name}>{el.name}</option>
+                        <option key={el.id} value={el.name} className='opt'>{el.name}</option>
                         ))
                     }
                 </select>
-                <select onChange={(e)=> handleFilterByCreator(e)} >
-                    <option value= "All" >Todos los creadores</option>
-                    <option value= "Creado">Creado BD</option>
-                    <option value= "Existente">Existente API</option>
+                <select onChange={(e)=> handleFilterByCreator(e)} className='selec'>
+                    <option value= "All" className='opt'>Todos los creadores</option>
+                    <option value= "Creado" className='opt'>Creado BD</option>
+                    <option value= "Existente" className='opt'>Existente API</option>
                 </select>
 
                 <br></br>
 
-                <label>Ordenar:  </label>
-                <select onChange={(e)=> handleSortAlfab(e)}>
-                    <option value= ""  >Orden Alfabetico</option>
-                    <option value= "Asc" >A - Z</option>
-                    <option value= "Desc" >Z - A</option>
+                <label className='lab'>Ordenar:  </label>
+                <select onChange={(e)=> handleSortAlfab(e)} className='selec'>
+                    <option value= ""  className='opt' >Orden Alfabetico</option>
+                    <option value= "Asc" className='opt'>A - Z</option>
+                    <option value= "Desc" className='opt'>Z - A</option>
                 </select>
-                <select onChange={(e)=> handleSortRating(e)}>
-                    <option value= "" >Rating</option>
-                    <option value= "Rating-asc" > Rating Ascendente</option>
-                    <option value= "Rating-desc" >Rating Descendente</option>
+                <select onChange={(e)=> handleSortRating(e)} className='selec'>
+                    <option value= "" className='opt'>Rating</option>
+                    <option value= "Rating-asc" className='opt' > Rating Ascendente</option>
+                    <option value= "Rating-desc" className='opt'>Rating Descendente</option>
                 </select>
 
+                <label className='lab'>Otras acciones: </label>
+                <Link to="/videogames">
+                    <button className='crear'>Crear Videojuego</button>
+                </Link>
             </div>
-            <Paginated 
-               
-                gamesxPage={gamesxPage} 
-                allVideogames={allVideogames.length} 
-                paginated={paginado}
-            />
-            <SearchBar />
+            
+            <div className="card_gral">
             {
                 actualGames && actualGames.map(el =>{
                     return ( 
@@ -120,11 +132,16 @@ export default function Home(){
                             genres={el.genres}
                             rating={el.rating}
                             id={el.id}
+                           
                         />
                         
                     )
                 })
             }
+            </div>
+
         </div>
+            
+    </div>
     )
 }

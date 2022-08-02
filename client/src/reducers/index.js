@@ -35,6 +35,7 @@ export default function rootReducer(state = initialState, action) {
         };
     
       case FILTER_BY_GENRE :
+        
          const gamesAPI = state.copy.filter(el => el.genres.includes(action.payload))
          const gamesDB = state.copy.filter( function(el) {  
             for(let i = 0; i < el.genres.length; i++){
